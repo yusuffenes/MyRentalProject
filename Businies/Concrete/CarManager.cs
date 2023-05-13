@@ -19,12 +19,12 @@ public class CarManager : ICarService
     }
     public IDataResult<List<Car>> GetAll()
     {
-        return new ErrorDataResult<List<Car>>(_carDal.GetAll(),false);
+        return new SuccessDataResult<List<Car>>(_carDal.GetAll(),Messages.CarList);
     }
 
     public IDataResult<List<CarDetailDto>> GetCarDetail()
     {
-        return new ErrorDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(),false);
+        return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
        
     }
 
@@ -34,7 +34,7 @@ public class CarManager : ICarService
     }
     public IResult Add(Car car)
     {
-        if (car.Descriptions.Length > 2 || car.DailyPrice > 0)
+        if (car.Description.Length > 2 || car.DailyPrice > 0)
         {
             _carDal.Add(car);
             return new SuccessResult(true,Messages.CarAdded);

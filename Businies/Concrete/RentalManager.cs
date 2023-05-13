@@ -1,0 +1,46 @@
+﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Abstract;
+using Core.Utilities.Concrete;
+using DataAccess.Abstract;
+using Entities.Concrete;
+
+namespace Business.Concrete;
+
+public class RentalManager : IRentalService
+{
+    IRentalDal _rentalDal;
+
+    public RentalManager(IRentalDal rental)
+    {
+        _rentalDal = rental;
+    }
+    public IResult Add(Rental rental)
+    {
+        _rentalDal.Add(rental);
+        return new SuccessResult(true,Messages.CarAdded);
+    }
+
+    public IResult Remove(Rental rental)
+    {
+        _rentalDal.Delete(rental);
+        return new SuccessResult(true, Messages.CarDelete);
+
+    }
+
+    public IResult Update(Rental rental)
+    {
+        _rentalDal.Update(rental);
+        return new SuccessResult(true,Messages.CarToUpdate);
+    }
+
+    public IDataResult<List<Rental>> GetAll()
+    {
+        return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll().ToList());
+    }
+
+    public IDataResult<Rental> GetById(int id)
+    {
+        return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.CarId == id));
+    }
+}

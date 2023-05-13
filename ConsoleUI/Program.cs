@@ -10,13 +10,33 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-       CarMethod();
+        BrandMethod();
+    }
+
+    private static void RentalMethod()
+    {
+        IRentalService rental = new RentalManager(new EfRentalDal());
+        var result = rental.GetAll();
+        foreach (var item in result.Data)
+        {
+            Console.WriteLine(item.CarId);
+        }
+    }
+
+    private static void ColorMethod1()
+    {
+        IColorService color = new ColorManager(new EfColorDal());
+        var result = color.GetColorList();
+        foreach (var itemUser in result.Data)
+        {
+            Console.WriteLine(itemUser.Name);
+        }
     }
 
     private static void CarAddMethod()
     {
         Car car1 = new Car
-            { BrandId = 2, ColorId = 2, DailyPrice = 129, Descriptions = "Yusuf", Id = 12, ModelYear = 2009 };
+            { BrandId = 2, ColorId = 2, DailyPrice = 129, Description = "Yusuf", Id = 12, ModelYear = 2009 };
         ICarService car = new CarManager(new EfCarDal());
         var result = car.Add(car1).Message;
         Console.WriteLine();
@@ -27,17 +47,20 @@ internal class Program
         IColorService color = new ColorManager(new EfColorDal());
         foreach (var itemColor in color.GetColorList().Data)
         {
-            Console.WriteLine(itemColor.ColorName);
+            Console.WriteLine(itemColor.Name);
         }
     }
 
     private static void BrandMethod()
     {
+
         IBrandService brandService = new BrandManager(new EfBrandDal());
-        foreach (var item in brandService.GetAllByBrand(2).Data)
+
+        var result = brandService.GetBrands();
+        foreach (var item in brandService.GetBrands().Data)
         {
-            Console.WriteLine(item.BrandName);
-            Console.WriteLine(brandService.GetAllByBrand(2).IsSuccess);
+            Console.WriteLine(item.Name);
+            Console.WriteLine(result.IsSuccess);
         }
     }
 
@@ -45,20 +68,16 @@ internal class Program
     {
         CarManager carManager = new CarManager(new EfCarDal());
         var result = carManager.GetCarDetail();
-        var result2 = carManager.GetAll().Message;
-        if ( result.IsSuccess == false)
+       
+        if ( result.IsSuccess == true)
         {
             foreach (var item in carManager.GetCarDetail().Data)
             {
-                Console.WriteLine(item.ColorName + "  / " + "  Günlük Kiralık Fiyatı : " + +item.DailyPrice + "  / " + "  Model Yılı :  : " + item.BrandName + " / ");
-                Console.WriteLine(result.Data);
+                Console.WriteLine(item.CarId );
+                Console.WriteLine(result.Message);
             }
         }
-        else
-        {
-            Console.WriteLine("1");
-            Console.WriteLine(result.Message);
-        }
+        
         
     }                 
 }

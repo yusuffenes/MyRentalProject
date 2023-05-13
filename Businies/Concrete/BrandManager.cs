@@ -18,12 +18,12 @@ public class BrandManager : IBrandService
 
         public IDataResult<List<Brand>> GetBrands()
         {
-            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(),true);
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll());
         }
 
         public IDataResult<List<Brand>> GetAllByBrand(int brandId)
         {
-            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(b => b.BrandId == brandId).ToList(),Messages.BrandListed);
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(b => b.Id == brandId).ToList());
         }
 
         public IResult Add(Brand brand)
