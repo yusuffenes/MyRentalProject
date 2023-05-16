@@ -11,6 +11,11 @@ internal class Program
 {
     private static void Main(string[] args)
     {
+        
+    }
+
+    private static void ColorMethod2()
+    {
         IColorService color = new ColorManager(new EfColorDal());
         var result = color.GetColorList();
         if (result != null && result.IsSuccess && result.Data != null)
@@ -22,10 +27,8 @@ internal class Program
         }
         else
         {
-            Console.WriteLine("2");// Sonuç null veya başarısız ise veya veri null ise gerekli hata işleme adımlarını yapabilirsiniz.
+            Console.WriteLine("2"); // Sonuç null veya başarısız ise veya veri null ise gerekli hata işleme adımlarını yapabilirsiniz.
         }
-
-
     }
 
     private static void RentalMethod()
