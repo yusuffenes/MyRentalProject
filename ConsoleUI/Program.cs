@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Channels;
 using Business.Abstract;
@@ -10,7 +11,21 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        BrandMethod();
+        IColorService color = new ColorManager(new EfColorDal());
+        var result = color.GetColorList();
+        if (result != null && result.IsSuccess && result.Data != null)
+        {
+            foreach (var itemColor in result.Data)
+            {
+                Console.WriteLine(itemColor.Name);
+            }
+        }
+        else
+        {
+            Console.WriteLine("2");// Sonuç null veya başarısız ise veya veri null ise gerekli hata işleme adımlarını yapabilirsiniz.
+        }
+
+
     }
 
     private static void RentalMethod()
@@ -30,6 +45,7 @@ internal class Program
         foreach (var itemUser in result.Data)
         {
             Console.WriteLine(itemUser.Name);
+            Console.WriteLine(result.Message);
         }
     }
 

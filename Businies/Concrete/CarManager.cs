@@ -1,4 +1,4 @@
-﻿using Business.Abstract;
+﻿ using Business.Abstract;
 using Business.Constants;
 using Core.Utilities.Abstract;
 using Core.Utilities.Concrete;
@@ -19,7 +19,7 @@ public class CarManager : ICarService
     }
     public IDataResult<List<Car>> GetAll()
     {
-        return new SuccessDataResult<List<Car>>(_carDal.GetAll(),Messages.CarList);
+        return new SuccessDataResult<List<Car>>(_carDal.GetAll());
     }
 
     public IDataResult<List<CarDetailDto>> GetCarDetail()
@@ -27,22 +27,17 @@ public class CarManager : ICarService
         return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
        
     }
-
-    public IDataResult<List<Car>> GetAllByDailyPrice(decimal price)
-    {
-        throw new NotImplementedException();
-    }
     public IResult Add(Car car)
     {
         if (car.Description.Length > 2 || car.DailyPrice > 0)
         {
             _carDal.Add(car);
-            return new SuccessResult(true,Messages.CarAdded);
+            return new SuccessResult(true,Messages.Added);
             
         }
         else
         {
-            return new ErrorResult(false,Messages.CarNameInvalid);
+            return new ErrorResult(false,Messages.NameInvalid);
             
         }
         
@@ -57,6 +52,6 @@ public class CarManager : ICarService
     public IResult Update(Car car)
     {
         _carDal.Update(car);
-        return new SuccessResult(true,Messages.CarToUpdate);
+        return new SuccessResult(true,Messages.Updated);
     }
 }

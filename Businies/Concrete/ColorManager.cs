@@ -29,18 +29,18 @@ public class ColorManager : IColorService
     public IResult Add(Color color)
     {
         _colorDal.Add(color);
-        return new SuccessResult(true, Messages.ColorAdded);
+        return new SuccessResult(true, Messages.Added);
     }
 
     public IResult Remove(Color color)
     {
         _colorDal.Delete(color);
-        return new SuccessResult(true, Messages.ColorDelete);
+        return new SuccessResult(true, Messages.Deleted);
     }
 
     public IResult Update(Color color)
     {
         _colorDal.Update(color);
-        return new SuccessResult(true, Messages.ColorToUpdate);
+        return new SuccessResult(true, Messages.Updated);
     }
 }

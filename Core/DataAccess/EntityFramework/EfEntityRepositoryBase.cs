@@ -37,16 +37,17 @@ public class EfEntityRepositoryBase<TEntity, TContext> : IEntityRepository<TEnti
         }
     }
 
-    public List<TEntity> GetAll(Expression<Func<TEntity, bool>>? filter)
+    public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
     {
         using (TContext context = new TContext())
         {
-            if (filter == null) // filter null ise varsayılan tüm araçları getir
+            if (filter == null) // filter null ise varsayılan tüm verileri getir
                 return context.Set<TEntity>().ToList();
             else // filtre null değilse filtreleme yap
                 return context.Set<TEntity>().Where(filter).ToList();
         }
     }
+
 
     public void Update(TEntity entity)
     {
