@@ -18,7 +18,7 @@ public class CustomerManager : ICustomerService
     public IResult Add(Customer customer)
     {
         _customerDal.Add(customer);
-        return new SuccessResult(true, Messages.Added);
+        return new SuccessResult(true, Messages.CustomerAdded);
 
 
     }
@@ -26,13 +26,13 @@ public class CustomerManager : ICustomerService
     public IResult Remove(Customer customer)
     {
         _customerDal.Delete(customer);
-        return new SuccessResult(true, Messages.Deleted);
+        return new SuccessResult(true, Messages.CustomerDeleted);
     }
 
     public IResult Update(Customer customer)
     {
         _customerDal.Update(customer);
-        return new SuccessResult(true,Messages.Updated);
+        return new SuccessResult(true,Messages.CustomerUpdated);
     }
 
     public IDataResult<List<Customer>> GetAll()

@@ -19,12 +19,19 @@ public class CarManager : ICarService
     }
     public IDataResult<List<Car>> GetAll()
     {
-        return new SuccessDataResult<List<Car>>(_carDal.GetAll());
+        if (System.DateTime.Now.Hour == 19)
+        {
+            return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
+        }
+        else
+        {
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(),Messages.CarListed);
+        }
     }
 
     public IDataResult<List<CarDetailDto>> GetCarDetail()
     {
-        return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
+        return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(),Messages.CarListed);
        
     }
     public IResult Add(Car car)
@@ -32,12 +39,12 @@ public class CarManager : ICarService
         if (car.Description.Length > 2 || car.DailyPrice > 0)
         {
             _carDal.Add(car);
-            return new SuccessResult(true,Messages.Added);
+            return new SuccessResult(true,Messages.CarAdded);
             
         }
         else
         {
-            return new ErrorResult(false,Messages.NameInvalid);
+            return new ErrorResult(false,Messages.CarNameInvalid);
             
         }
         
@@ -52,6 +59,6 @@ public class CarManager : ICarService
     public IResult Update(Car car)
     {
         _carDal.Update(car);
-        return new SuccessResult(true,Messages.Updated);
+        return new SuccessResult(true,Messages.RentalUpdated);
     }
 }

@@ -18,20 +18,20 @@ public class RentalManager : IRentalService
     public IResult Add(Rental rental)
     {
         _rentalDal.Add(rental);
-        return new SuccessResult(true,Messages.Added);
+        return new SuccessResult(true,Messages.RentalAdded);
     }
 
     public IResult Remove(Rental rental)
     {
         _rentalDal.Delete(rental);
-        return new SuccessResult(true, Messages.Deleted);
+        return new SuccessResult(true, Messages.RentalDeleted);
 
     }
 
     public IResult Update(Rental rental)
     {
         _rentalDal.Update(rental);
-        return new SuccessResult(true,Messages.Updated);
+        return new SuccessResult(true,Messages.RentalUpdated);
     }
 
     public IDataResult<List<Rental>> GetAll()

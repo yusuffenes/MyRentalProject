@@ -2,6 +2,6 @@
 
 public interface IResult
 {
-    bool IsSuccess { get; }
-    string Message { get; }
+    public bool IsSuccess { get; }
+    public string Message { get; }
 }

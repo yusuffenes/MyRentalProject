@@ -41,12 +41,13 @@ public class EfEntityRepositoryBase<TEntity, TContext> : IEntityRepository<TEnti
     {
         using (TContext context = new TContext())
         {
-            if (filter == null) // filter null ise varsayılan tüm verileri getir
+            if (filter == null)
                 return context.Set<TEntity>().ToList();
-            else // filtre null değilse filtreleme yap
+            else
                 return context.Set<TEntity>().Where(filter).ToList();
         }
     }
+
 
 
     public void Update(TEntity entity)

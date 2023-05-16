@@ -29,19 +29,19 @@ public class BrandManager : IBrandService
         public IResult Add(Brand brand)
         {
             _brandDal.Add(brand);
-            return new SuccessResult(true, Messages.Added);
+            return new SuccessResult(true, Messages.BrandAdded);
         }
 
         public IResult Update(Brand brand)
         {
             _brandDal.Update(brand);
-            return new SuccessResult(true, Messages.Updated);
+            return new SuccessResult(true, Messages.BrandUpdated);
 }
 
         public IResult Delete(Brand brand)
         {
             _brandDal.Delete(brand);
-            return new SuccessResult(true, Messages.Deleted);
+            return new SuccessResult(true, Messages.BrandDeleted);
 }
 }
 
