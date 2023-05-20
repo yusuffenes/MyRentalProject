@@ -36,7 +36,7 @@ public class RentalManager : IRentalService
 
     public IDataResult<List<Rental>> GetAll()
     {
-        return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll().ToList());
+        return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll().ToList(),Messages.RentalListed);
     }
 
     public IDataResult<Rental> GetById(int id)

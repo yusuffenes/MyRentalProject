@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Abstract;
 using Core.Utilities.Concrete;
 using DataAccess.Abstract;
@@ -18,14 +20,14 @@ public class BrandManager : IBrandService
 
         public IDataResult<List<Brand>> GetBrands()
         {
-            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll());
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(),Messages.BrandListed);
         }
 
         public IDataResult<List<Brand>> GetAllByBrand(int brandId)
         {
-            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(b => b.Id == brandId).ToList());
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(b => b.Id == brandId).ToList(),Messages.BrandListed);
         }
-
+        [ValidationAspect(typeof(BrandValidator))]
         public IResult Add(Brand brand)
         {
             _brandDal.Add(brand);

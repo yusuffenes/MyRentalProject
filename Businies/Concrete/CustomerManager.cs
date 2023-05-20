@@ -37,11 +37,11 @@ public class CustomerManager : ICustomerService
 
     public IDataResult<List<Customer>> GetAll()
     {
-        return new SuccessDataResult<List<Customer>>(_customerDal.GetAll().ToList());
+        return new SuccessDataResult<List<Customer>>(_customerDal.GetAll().ToList(),Messages.CustomerListed);
     }
 
     public IDataResult<Customer> GetById(int id)
     {
-        return new SuccessDataResult<Customer>(_customerDal.Get(c => c.UserId == id));
+        return new SuccessDataResult<Customer>(_customerDal.Get(c => c.UserId == id), Messages.CustomerListed);
     }
 }

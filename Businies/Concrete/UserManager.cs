@@ -35,7 +35,7 @@ public class UserManager : IUserService
 
     public IDataResult<List<User>> GetAll()
     {
-        return new SuccessDataResult<List<User>>(_userDal.GetAll().ToList());
+        return new SuccessDataResult<List<User>>(_userDal.GetAll().ToList(),Messages.UserListed);
     }
 
     public IDataResult<User> GetById(int id)

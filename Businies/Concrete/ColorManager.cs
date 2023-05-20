@@ -18,12 +18,12 @@ public class ColorManager : IColorService
 
     public IDataResult<List<Color>> GetColorList()
     {
-        return new SuccessDataResult<List<Color>>(_colorDal.GetAll().ToList());
+        return new SuccessDataResult<List<Color>>(_colorDal.GetAll().ToList(),Messages.ColorListed);
     }
 
     public IDataResult<List<Color>> GetAllByColorId(int colorId)
     {
-        return new SuccessDataResult<List<Color>>(_colorDal.GetAll(c => c.Id == colorId));
+        return new SuccessDataResult<List<Color>>(_colorDal.GetAll(c => c.Id == colorId), Messages.ColorListed);
     }
 
     public IResult Add(Color color)
